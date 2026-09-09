@@ -945,9 +945,9 @@ function calculateElectricity() {
     // ค่า Ft
     // ========================================
 
-    const ftCost =Math.ceil(100*
+    const ftCost =
         totalUnits *
-        ftRate/100)/100;
+        ftRate/100);
 
 
     // ========================================
