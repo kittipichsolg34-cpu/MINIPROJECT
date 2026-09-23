@@ -15,6 +15,13 @@
             <p>คำนวณค่าไฟตามอัตราที่เลือก พร้อมค่า Ft และ VAT 7%</p>
         </header>
 
+        <div class="tabs">
+            <button class="tab-btn active" data-tab="calculatorTab">คำนวณค่าไฟ</button>
+            <button class="tab-btn" data-tab="savedTab">ข้อมูลที่บันทึก</button>
+        </div>
+
+        <div id="calculatorTab" class="tab-content active">
+
         <div class="calculator">
 
             <!-- ประเภทผู้ใช้ไฟฟ้า -->
@@ -87,6 +94,8 @@
 
         </div>
 
+        </div>
+
         <!-- ผลลัพธ์ -->
         <div class="result hidden" id="result">
             <h2>ผลการคำนวณ</h2>
@@ -133,6 +142,20 @@
         <div class="info">
             <h3>ประวัติการคำนวณล่าสุด</h3>
             <div id="localHistory">ยังไม่มีประวัติการคำนวณในเครื่องนี้</div>
+        </div>
+
+        <button id="saveBtn" class="save-btn">บันทึกข้อมูลลง Cloud</button>
+
+        </div>
+
+        <div id="savedTab" class="tab-content">
+            <div class="info saved-info">
+                <h2>ข้อมูลที่บันทึก</h2>
+                <p id="cloudStatus">กำลังโหลดข้อมูล...</p>
+                <div id="savedList">
+                    <p>ยังไม่มีข้อมูลที่บันทึก</p>
+                </div>
+            </div>
         </div>
 
         <div class="info">
