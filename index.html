@@ -8,25 +8,36 @@
 </head>
 <body>
 
-    <div class="container">
+<div class="container">
 
-        <header>
-            <h1>⚡ เว็บไซต์คำนวณค่าไฟฟ้า</h1>
-            <p>คำนวณค่าไฟตามอัตราที่เลือก พร้อมค่า Ft และ VAT 7%</p>
-        </header>
+    <header>
+        <h1>⚡ เว็บไซต์คำนวณค่าไฟฟ้า</h1>
+        <p>คำนวณค่าไฟตามอัตราที่เลือก พร้อมค่า Ft และ VAT 7%</p>
+    </header>
 
-        <div class="tabs">
-            <button class="tab-btn active" data-tab="calculatorTab">คำนวณค่าไฟ</button>
-            <button class="tab-btn" data-tab="savedTab">ข้อมูลที่บันทึก</button>
-        </div>
+    <div class="tabs">
+        <button class="tab-btn active" data-tab="calculatorTab">
+            คำนวณค่าไฟ
+        </button>
 
-        <div id="calculatorTab" class="tab-content active">
+        <button class="tab-btn" data-tab="savedTab">
+            ข้อมูลที่บันทึก
+        </button>
+    </div>
+
+
+    <!-- ============================= -->
+    <!-- Calculator Tab -->
+    <!-- ============================= -->
+
+    <div id="calculatorTab" class="tab-content active">
 
         <div class="calculator">
 
             <!-- ประเภทผู้ใช้ไฟฟ้า -->
             <div class="form-group">
                 <label for="userType">ประเภทผู้ใช้ไฟฟ้า</label>
+
                 <select id="userType">
                     <option value="1">ประเภท 1 - บ้านอยู่อาศัย</option>
                     <option value="2">ประเภท 2 - กิจการขนาดเล็ก</option>
@@ -42,15 +53,13 @@
             <!-- ประเภทอัตรา -->
             <div class="form-group">
                 <label for="rateType">ประเภทอัตรา</label>
-                <select id="rateType">
-                </select>
+                <select id="rateType"></select>
             </div>
 
             <!-- ระดับแรงดัน -->
             <div class="form-group" id="voltageGroup">
                 <label for="voltage">ระดับแรงดันไฟฟ้า</label>
-                <select id="voltage">
-                </select>
+                <select id="voltage"></select>
             </div>
 
             <!-- จำนวนหน่วยปกติ -->
@@ -77,7 +86,7 @@
                 <input type="number" id="demand" min="0" step="0.01" placeholder="เช่น 50">
             </div>
 
-            <!-- Partial Demand สำหรับ TOD -->
+            <!-- Partial Demand -->
             <div class="form-group hidden" id="partialDemandGroup">
                 <label for="partialDemand">Partial Demand (kW)</label>
                 <input type="number" id="partialDemand" min="0" step="0.01" placeholder="เช่น 20">
@@ -87,17 +96,23 @@
             <div class="form-group">
                 <label for="ft">ค่า Ft (สตางค์/หน่วย)</label>
                 <input type="number" id="ft" step="0.0001" placeholder="กรอกค่า Ft เช่น 15.00">
-                <small>ผู้ใช้สามารถกำหนดค่า Ft เอง</small>
+
+                <small>
+                    ผู้ใช้สามารถกำหนดค่า Ft เอง
+                </small>
             </div>
 
-            <button id="calculateBtn">คำนวณค่าไฟ</button>
+            <button id="calculateBtn">
+                คำนวณค่าไฟ
+            </button>
 
         </div>
 
-        </div>
 
-        <!-- ผลลัพธ์ -->
+        <!-- ผลการคำนวณ -->
+
         <div class="result hidden" id="result">
+
             <h2>ผลการคำนวณ</h2>
 
             <div class="result-row">
@@ -136,38 +151,85 @@
                 <span>ค่าไฟทั้งหมด</span>
                 <strong id="total">0.00 บาท</strong>
             </div>
+
         </div>
 
-        <!-- ข้อมูลเพิ่มเติม / LocalStorage History Preview -->
+
+        <!-- Local Storage -->
+
         <div class="info">
+
             <h3>ประวัติการคำนวณล่าสุด</h3>
-            <div id="localHistory">ยังไม่มีประวัติการคำนวณในเครื่องนี้</div>
-        </div>
 
-        <button id="saveBtn" class="save-btn">บันทึกข้อมูลลง Cloud</button>
-
-        </div>
-
-        <div id="savedTab" class="tab-content">
-            <div class="info saved-info">
-                <h2>ข้อมูลที่บันทึก</h2>
-                <p id="cloudStatus">กำลังโหลดข้อมูล...</p>
-                <div id="savedList">
-                    <p>ยังไม่มีข้อมูลที่บันทึก</p>
-                </div>
+            <div id="localHistory">
+                ยังไม่มีประวัติการคำนวณในเครื่องนี้
             </div>
+
         </div>
+
+
+        <!-- Save Cloud -->
+
+        <button id="saveBtn" class="save-btn">
+            บันทึกข้อมูลลง Cloud
+        </button>
+
+
+        <!-- สูตรการคำนวณ -->
+        <!-- อยู่ด้านล่างสุดของ Tab คำนวณค่าไฟ -->
 
         <div class="info">
+
             <h3>สูตรการคำนวณ</h3>
-            <p>ค่าไฟดิบ = ค่าไฟฟ้าพลังงาน + ค่าความต้องการพลังไฟฟ้า + ค่าบริการ + ค่า Ft</p>
-            <p>VAT = ค่าไฟดิบ × 7%</p>
-            <p>ค่าไฟทั้งหมด = ค่าไฟดิบ + VAT</p>
+
+            <p>
+                ค่าไฟดิบ =
+                ค่าไฟฟ้าพลังงาน +
+                ค่าความต้องการพลังไฟฟ้า +
+                ค่าบริการ +
+                ค่า Ft
+            </p>
+
+            <p>
+                VAT = ค่าไฟดิบ × 7%
+            </p>
+
+            <p>
+                ค่าไฟทั้งหมด = ค่าไฟดิบ + VAT
+            </p>
+
         </div>
 
     </div>
-    
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-    <script src="script.js"></script>
+
+
+    <!-- ============================= -->
+    <!-- Saved Cloud Tab -->
+    <!-- ============================= -->
+
+    <div id="savedTab" class="tab-content">
+
+        <div class="info saved-info">
+
+            <h2>ข้อมูลที่บันทึก</h2>
+
+            <p id="cloudStatus">
+                กำลังโหลดข้อมูล...
+            </p>
+
+            <div id="savedList">
+                <p>ยังไม่มีข้อมูลที่บันทึก</p>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="script.js"></script>
+
 </body>
 </html>
